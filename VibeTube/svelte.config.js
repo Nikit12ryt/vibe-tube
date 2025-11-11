@@ -1,18 +1,19 @@
-import adapter from '@sveltejs/adapter-auto';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+// 1. Импортируем адаптер-auto
+import adapter from '@sveltejs/adapter-auto'; 
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://svelte.dev/docs/kit/integrations
-	// for more information about preprocessors
-	preprocess: vitePreprocess(),
-
-	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
-	}
+    // ... (остальные настройки)
+    kit: {
+        // Указываем, какой адаптер использовать
+        adapter: adapter(), 
+        paths: {
+            // Если вы публикуете на Vercel, вам больше не нужен префикс /vibe-tube
+            // (если только вы не используете собственный домен или другую сложную конфигурацию).
+            // Для первого развертывания лучше оставить base пустым.
+            base: '', 
+        }
+    }
 };
 
 export default config;

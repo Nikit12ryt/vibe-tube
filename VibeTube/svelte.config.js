@@ -1,12 +1,12 @@
-import adapter from '@sveltejs/adapter-vercel'; // Используем Vercel адаптер
+import adapter from '@sveltejs/adapter-netlify'; // Используем Netlify адаптер
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-    // ... (остальные настройки)
+    // ... (другие настройки)
     kit: {
         adapter: adapter(), 
         paths: {
-            // Удаляем префикс, так как Vercel использует корневой домен
+            // Оставляем пустым для корневого домена Netlify
             base: '', 
         }
     }

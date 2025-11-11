@@ -1,15 +1,14 @@
-import adapter from '@sveltejs/adapter-netlify'; // Используем Netlify адаптер
+import adapter from '@sveltejs/adapter-netlify';
+import { readFileSync, writeFileSync } from 'fs'; // Импортируем fs
 
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-    // ... (другие настройки)
-    kit: {
-        adapter: adapter(), 
-        paths: {
-            // Оставляем пустым для корневого домена Netlify
-            base: '', 
+// Функция для копирования файла _redirects
+function netlifyRedirects() {
+    return {
+        name: 'netlify-redirects',
+        // Выполняется после завершения сборки адаптера
+        async finalize({ outDir }) {
+            const redirectFile = readFileSync('_redirects', 'utf-8');
+            writeFileSync(`${outDir}/_redirects`, redirectFile);
         }
-    }
-};
-
-export default config;
+    };
+}
